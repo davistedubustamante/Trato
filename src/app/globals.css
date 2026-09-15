@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --bg: oklch(1 0 0);
+  --surface: oklch(0.985 0.008 170);
+  --ink: oklch(0.22 0.02 170);
+  --muted: oklch(0.45 0.02 170);
+  --line: oklch(0.9 0.015 170);
+  --primary: oklch(0.42 0.09 170);
+  --primary-soft: oklch(0.94 0.03 170);
+  --accent: oklch(0.58 0.14 35);
+  --accent-ink: oklch(0.98 0.01 35);
+  --danger: oklch(0.52 0.18 25);
+  --ok: oklch(0.55 0.12 150);
+  --shadow: 0 12px 40px oklch(0.22 0.02 170 / 0.12);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.trato-shell {
+  width: min(100%, 480px);
+  margin-inline: auto;
+  min-height: 100dvh;
+  position: relative;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.trato-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px oklch(0 0 0 / 0.25);
+}
+
+.trato-marker--pulse {
+  position: relative;
+}
+
+.trato-marker--pulse::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 2px solid currentColor;
+  opacity: 0.45;
+  animation: trato-pulse 1.6s ease-out infinite;
+}
+
+@keyframes trato-pulse {
+  from {
+    transform: scale(0.7);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trato-marker--pulse::after {
+    animation: none;
+  }
+}
+
+.leaflet-container {
+  font: inherit;
+  background: #e8eef2;
+}
